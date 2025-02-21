@@ -1,0 +1,206 @@
+/*--------------------MISSIONE--------------*/
+
+
+.content-mission{
+    display: flex;
+    flex-direction: row;
+    background-color: #6B5033;
+    justify-content: space-between;
+    align-items: center;
+    gap: 100px;
+    padding-bottom: 2rem;
+    opacity: 0;
+}
+
+
+.content-mission img{
+    margin-left: 5rem;
+    object-fit: cover;
+    object-position: center;
+    width: 550px;
+    height: 350px;
+}
+
+.mission-description{
+    display: flex;
+    flex-direction: column;
+    margin-right: 5rem;
+}
+
+.mission-description h1{
+    font-family: 'Kaushan Script', cursive;
+    color: white;
+    font-size: 50px;
+}
+
+.mission-description p{
+    font-family: 'Istok Web', cursive;
+    color: white;
+    font-size: 25px;
+}
+
+
+/*------------------STORIA--------------------*/
+
+
+.content-storia,
+.content-chisiamo{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #5F4830;
+    align-items: center;
+    gap: 100px;
+    padding-bottom: 2rem;
+    opacity: 0;
+}
+
+/* Animazione */
+@keyframes fade-in-left {
+    0% {
+        opacity: 0;
+        transform: translateX(-200px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fade-in-right {
+    0% {
+        opacity: 0;
+        transform: translateX(200px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+.content-storia img,
+.content-chisiamo img
+{
+    margin-right: 5rem;
+    object-fit: cover;
+    width: 550px;
+    height: 350px;
+}
+
+.storia-description,
+.description-chisiamo
+{
+    display: flex;
+    flex-direction: column;
+    margin-left: 5rem;
+}
+
+.storia-description h1,
+.description-chisiamo h1
+{
+    font-family: 'Kaushan Script', cursive;
+    color: white;
+    font-size: 50px;
+}
+
+.storia-description p,
+.description-chisiamo p
+{
+    font-family: 'Istok Web', cursive;
+    color: white;
+    font-size: 25px;
+}
+
+
+@keyframes fade-in-left {
+    0% {
+        opacity: 0;
+        transform: translateX(-200px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fade-in-right {
+    0% {
+        opacity: 0;
+        transform: translateX(200px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+
+/* Classe per attivare l'animazione */
+.content-mission.animate,
+.content-storia.animate,
+.content-chisiamo.animate {
+    opacity: 1;
+    animation: fade-in-left 1s ease-out forwards; /* O cambia con fade-in-right per gli altri */
+}
+
+/* Puoi variare l'animazione a seconda di quale elemento deve scorrere da sinistra o destra */
+.content-mission.animate {
+    animation: fade-in-right 1s ease-out forwards;
+}
+
+
+
+
+
+.footer-decor {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -30px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    animation: moveDecor 10s infinite linear;
+}
+
+.wave {
+    width: 200%;
+    height: 100px;
+    background: url('https://www.transparenttextures.com/patterns/black-linen.png') repeat;
+    border-radius: 50%;
+    opacity: 0.2;
+    transform: rotate(-45deg);
+}
+
+.circle {
+    width: 150px;
+    height: 150px;
+    background: url('https://www.transparenttextures.com/patterns/black-linen.png') repeat;
+    border-radius: 50%;
+    opacity: 0.2;
+    position: absolute;
+    bottom: -70px;
+    right: 10%;
+    animation: bounceCircle 2s infinite ease-in-out;
+}
+
+/* Animazioni */
+@keyframes moveDecor {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes bounceCircle {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(20px);
+    }
+}

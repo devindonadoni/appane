@@ -70,7 +70,53 @@
             </div>
         </div>
 
+
+        <div class="content-chisiamo">
+            <div class="description-chisiamo">
+                <h1>Chi siamo</h1>
+                <p>Noi di Appane siamo felici di presentarvi il nostro brand, nato per celebrare la passione per la
+                    panificazione artigianale e la bontà autentica. Con dedizione e cura, prepariamo ogni giorno
+                    prodotti da forno freschi, pensati per regalare momenti di piacere in ogni morso.
+                    Dai pani fragranti appena sfornati ai dolci che scaldano il cuore, ogni creazione è frutto di
+                    un’attenta selezione di ingredienti genuini e di alta qualità. Siamo qui per offrirvi un’esperienza
+                    che unisce tradizione e innovazione, con sapori che sanno di casa e profumi che conquistano al primo
+                    respiro.</p>
+            </div>
+            <img src="img/stock/chisiamo.png" alt="">
+        </div>
+
+        <div class="content-mission">
+            <img src="img/stock/mission.png" alt="">
+            <div class="mission-description">
+                <h1>La nostra missione</h1>
+                <p>La nostra missione in Appane è portare ogni giorno sulle vostre tavole la bontà autentica della
+                    panificazione artigianale. Crediamo nella qualità senza compromessi e nella cura dei dettagli,
+                    selezionando con amore ingredienti genuini e freschi per creare prodotti che regalino emozioni ad
+                    ogni morso. Vogliamo essere il punto di riferimento per chi cerca sapori veri, capaci di risvegliare
+                    ricordi e creare nuovi momenti di felicità.</p>
+            </div>
+        </div>
+
+        <div class="content-storia">
+            <div class="storia-description">
+                <h1>La nostra storia</h1>
+                <p>trieste abbastanza recente di nome appane
+                    ChatGPT ha detto:
+                    Nel 2020, a Trieste, è nata Appane, una panetteria che ha subito conquistato il cuore dei cittadini
+                    con la sua proposta innovativa e autentica. Fondata da Andrea e il signor Appane, due giovani appassionati di
+                    panificazione e tradizioni locali, Appane ha subito puntato su ingredienti freschi e di qualità,
+                    come le farine triestine e i lieviti naturali. La missione era chiara: portare un pane genuino, che
+                    rispetta le tradizioni ma con un tocco di modernità. </p>
+            </div>
+            <img src="img/stock/storia.png" alt="">
+        </div>
+
+        <!-- <div class="footer-decor">
+            <div class="wave"></div>
+            <div class="circle"></div>
+        </div> -->
     </div>
+
 
 
     <!-- Aggiungi subito prima della chiusura del tag body -->
@@ -78,6 +124,23 @@
 
 </body>
 <script src="js/universal-script.js"></script>
+
+<script>
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate'); // Aggiungi una classe che avvia l'animazione
+                observer.unobserve(entry.target); // Non osservare più l'elemento dopo l'animazione
+            }
+        });
+    }, { threshold: 0.5 }); // Trigger l'animazione quando il 50% dell'elemento è visibile
+
+    // Aggiungi l'osservatore agli elementi
+    document.querySelectorAll('.content-mission, .content-storia, .content-chisiamo').forEach((element) => {
+        observer.observe(element);
+    });
+
+</script>
 
 
 </html>
