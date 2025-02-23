@@ -20,3 +20,7 @@ NProgress.configure({ showSpinner: false });
 window.addEventListener('load', function () {
     NProgress.done();
 });
+
+function redirect(link){
+    window.location.replace(link+".html");
+}

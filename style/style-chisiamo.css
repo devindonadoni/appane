@@ -1,58 +1,22 @@
-/*--------------------MISSIONE--------------*/
-
-
-.content-mission{
-    display: flex;
-    flex-direction: row;
-    background-color: #6B5033;
-    justify-content: space-between;
-    align-items: center;
-    gap: 100px;
-    padding-bottom: 2rem;
-    opacity: 0;
-}
-
-
-.content-mission img{
-    margin-left: 5rem;
-    object-fit: cover;
-    object-position: center;
-    width: 550px;
-    height: 350px;
-}
-
-.mission-description{
-    display: flex;
-    flex-direction: column;
-    margin-right: 5rem;
-}
-
-.mission-description h1{
-    font-family: 'Kaushan Script', cursive;
-    color: white;
-    font-size: 50px;
-}
-
-.mission-description p{
-    font-family: 'Istok Web', cursive;
-    color: white;
-    font-size: 25px;
-}
-
 
 /*------------------STORIA--------------------*/
 
 
 .content-storia,
+.content-hover,
+.content-mission,
 .content-chisiamo{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: #5F4830;
+    /* background-color: #5F4830; */
     align-items: center;
     gap: 100px;
     padding-bottom: 2rem;
     opacity: 0;
+    margin: 0 5rem;
+    margin-top: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.432);
 }
 
 /* Animazione */
@@ -80,23 +44,25 @@
 
 
 .content-storia img,
+.content-mission img,
 .content-chisiamo img
 {
-    margin-right: 5rem;
     object-fit: cover;
     width: 550px;
-    height: 350px;
+    height: 300px;
 }
 
 .storia-description,
+.mission-description,
+.hover-description,
 .description-chisiamo
 {
     display: flex;
     flex-direction: column;
-    margin-left: 5rem;
 }
 
 .storia-description h1,
+.mission-description h1,
 .description-chisiamo h1
 {
     font-family: 'Kaushan Script', cursive;
@@ -105,11 +71,12 @@
 }
 
 .storia-description p,
+.mission-description p,
 .description-chisiamo p
 {
     font-family: 'Istok Web', cursive;
     color: white;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 
@@ -138,17 +105,141 @@
 
 
 /* Classe per attivare l'animazione */
-.content-mission.animate,
 .content-storia.animate,
+.content-produzione.animate,
 .content-chisiamo.animate {
     opacity: 1;
     animation: fade-in-left 1s ease-out forwards; /* O cambia con fade-in-right per gli altri */
 }
 
 /* Puoi variare l'animazione a seconda di quale elemento deve scorrere da sinistra o destra */
+.content-hover.animate,
 .content-mission.animate {
     animation: fade-in-right 1s ease-out forwards;
 }
+
+
+
+
+/*-----------HOVER----------*/
+.content-hover{
+    margin: 5rem 20%;
+    border: none;
+    opacity: 1;
+}
+
+.single-hover{
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(217, 217, 217, 0.04);
+    box-shadow: 4px 4px 4px rgba(83, 83, 83, 0.342);
+    border-radius: 25px;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.single-hover i{
+    font-size: 150px;
+    color: white;
+}
+
+.single-hover p {
+    color: white;
+    font-size: 22px;
+    text-align: center;
+    max-width: 260px; /* Imposta una larghezza massima per forzare l'andata a capo */
+    word-wrap: break-word; /* Assicura che le parole vadano a capo */
+}
+
+.single-hover a{
+    color: #A36D16;
+    font-size: 20px;
+    padding: 5px;
+}
+
+.single-hover:hover{
+    transform: scale(1.1);
+}
+
+.single-hover a:hover{
+    background-color: rgba(128, 128, 128, 0.432);
+    border-radius: 5px;
+}
+
+
+
+/*----------------------------------------------------------------PRODUZIONE--------------------------------------------*/
+.content-produzione{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 50rem 5rem;
+    margin-bottom: 5rem;
+}
+
+
+.content-produzione img{
+    width: 60%;
+    margin-left: 40%;
+    height: 600px;
+    object-fit: cover;
+    position: absolute;
+}
+
+.produzione-description {
+    padding: 2rem;
+    color: white;
+    position: relative;
+    width: 50%;
+    z-index: 2;
+}
+
+.categoria{
+    margin: 0;
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+}
+
+.title{
+    margin: 0;
+    font-size: 90px;
+    font-weight: bold;
+}
+
+.testo{
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.button{
+    font-size: 22px;
+    font-weight: lighter;
+    border: 1px solid white;
+    background-color: transparent;
+    color: white;
+    padding: 15px 40px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.button:hover{
+    background-color: #A36D16;
+    transform: scale(1.1);
+    border: none;
+}
+
+
+
+
+/*--------------------------ingredienti------------------------------*/
+
+
+
+
+
 
 
 

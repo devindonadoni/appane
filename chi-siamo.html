@@ -20,42 +20,42 @@
 </head>
 
 <body>
+    <div class="header">
+        <a href="index.html"><img src="img/logo.png" alt=""></a>
+        <div class="link">
+            <a href="menu.html">
+                <p>Menu</p>
+            </a>
+            <a href="chi-siamo.html">
+                <p id="active">Chi siamo</p>
+            </a>
+            <a href="consegna.html">
+                <p>Consegna</p>
+            </a>
+            <a href="contatti.html">
+                <p>Contatti</p>
+            </a>
+        </div>
+        <div class="nav-link">
+            <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
+            <a href="" class="cart-wrapper"><i class="fa-solid fa-basket-shopping"></i>
+                <span class="cart-count">
+                    4
+                </span></a>
+            <a href="">
+                <i class="fa-solid fa-user"></i>
+            </a>
+        </div>
+        <!-- Menu a panino -->
+        <div class="hamburger-menu">
+            <i class="fa-solid fa-bars" onclick="toggleMobileMenu()"></i>
+        </div>
+    </div>
     <div class="main-container">
 
         <div class="vendita-bar">
             <i class="fa-solid fa-store"></i>
             <p>MENU DELLA SETTIMANA ORA DISPONIBILE</p>
-        </div>
-        <div class="header">
-            <a href="index.html"><img src="img/logo.png" alt=""></a>
-            <div class="link">
-                <a href="menu.html">
-                    <p>Menu</p>
-                </a>
-                <a href="chi-siamo.html">
-                    <p id="active">Chi siamo</p>
-                </a>
-                <a href="consegna.html">
-                    <p>Consegna</p>
-                </a>
-                <a href="contatti.html">
-                    <p>Contatti</p>
-                </a>
-            </div>
-            <div class="nav-link">
-                <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
-                <a href="" class="cart-wrapper"><i class="fa-solid fa-basket-shopping"></i>
-                    <span class="cart-count">
-                        4
-                    </span></a>
-                <a href="">
-                    <i class="fa-solid fa-user"></i>
-                </a>
-            </div>
-            <!-- Menu a panino -->
-            <div class="hamburger-menu">
-                <i class="fa-solid fa-bars" onclick="toggleMobileMenu()"></i>
-            </div>
         </div>
 
         <!-- Menu mobile -->
@@ -100,10 +100,10 @@
         <div class="content-storia">
             <div class="storia-description">
                 <h1>La nostra storia</h1>
-                <p>trieste abbastanza recente di nome appane
-                    ChatGPT ha detto:
+                <p>
                     Nel 2020, a Trieste, è nata Appane, una panetteria che ha subito conquistato il cuore dei cittadini
-                    con la sua proposta innovativa e autentica. Fondata da Andrea e il signor Appane, due giovani appassionati di
+                    con la sua proposta innovativa e autentica. Fondata da Andrea e il signor Appane, due giovani
+                    appassionati di
                     panificazione e tradizioni locali, Appane ha subito puntato su ingredienti freschi e di qualità,
                     come le farine triestine e i lieviti naturali. La missione era chiara: portare un pane genuino, che
                     rispetta le tradizioni ma con un tocco di modernità. </p>
@@ -111,11 +111,40 @@
             <img src="img/stock/storia.png" alt="">
         </div>
 
-        <!-- <div class="footer-decor">
-            <div class="wave"></div>
-            <div class="circle"></div>
-        </div> -->
+        <div class="content-hover">
+            <div class="single-hover">
+                <i class="fa-solid fa-map"></i>
+                <p>Consegna in un giorno a Trieste</p>
+                <a href="consegna.php"><u>Esplora</u></a>
+            </div>
+            <div class="single-hover">
+                <i class="fa-solid fa-ranking-star"></i>
+                <p>Campioni di qualita’ in tutto il FVG</p>
+                <a href=""><u>Esplora</u></a>
+            </div>
+            <div class="single-hover">
+                <i class="fa-solid fa-shop-lock"></i>
+                <p>Pagamento alla consegna</p>
+                <a href="pagamento.php"><u>Esplora</u></a>
+            </div>
+        </div>
+
+
+        <div class="content-produzione">
+            <div class="produzione-description">
+                <p class="categoria">PRODUZIONE</p>
+                <p class="title">QUALITA' ARTIGIALE</p>
+                <p class="testo">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vel nisl condimentum, pellentesque
+                    augue elementum, aliquam neque. Praesent imperdiet tortor ipsum, at lobortis nulla interdum in.</p>
+                <button class="button">SCOPRI</button>
+            </div>
+            <img src="img/stock/produzione.png" alt="">
+        </div>
+
+        
     </div>
+
+
 
 
 
@@ -136,7 +165,7 @@
     }, { threshold: 0.5 }); // Trigger l'animazione quando il 50% dell'elemento è visibile
 
     // Aggiungi l'osservatore agli elementi
-    document.querySelectorAll('.content-mission, .content-storia, .content-chisiamo').forEach((element) => {
+    document.querySelectorAll('.content-mission, .content-storia, .content-chisiamo, .content-produzione').forEach((element) => {
         observer.observe(element);
     });
 
