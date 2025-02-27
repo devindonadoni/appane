@@ -147,8 +147,21 @@
             <img src="img/stock/produzione.png" alt="">
         </div>
 
-        
-    </div>
+        <div class="content-ingredienti">
+            <img src="img/stock/ingredienti.png" alt="">
+            <div class="ingredienti-description">
+                <p class="categoria">PRODUZIONE</p>
+                <p class="title">INGREDIENTI RICERCATI</p>
+                <p class="testo">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vel nisl condimentum, pellentesque
+                    augue elementum, aliquam neque. Praesent imperdiet tortor ipsum, at lobortis nulla interdum in.</p>
+                <button class="button">SCOPRI</button>
+            </div>
+        </div>   
+    </div>       <!-- div main-container-->
+
+
+
+
     <div class="footer">
         <div class="rigraziamenti">
             <img src="img/logo.png" alt="">
@@ -206,7 +219,7 @@
     }, { threshold: 0.35 }); // Trigger l'animazione quando il 50% dell'elemento è visibile
 
     // Aggiungi l'osservatore agli elementi
-    document.querySelectorAll('.content-mission, .content-storia, .content-chisiamo, .content-produzione').forEach((element) => {
+    document.querySelectorAll('.content-mission, .content-storia, .content-chisiamo, .content-produzione, .content-ingredienti').forEach((element) => {
         observer.observe(element);
     });
 

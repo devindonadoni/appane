@@ -139,6 +139,7 @@
 
 /* Puoi variare l'animazione a seconda di quale elemento deve scorrere da sinistra o destra */
 .content-hover.animate,
+.content-ingredienti.animate,
 .content-mission.animate {
     animation: fade-in-right 1s ease-out forwards;
 }
@@ -200,19 +201,19 @@
 
 /*----------------------------------------------------------------PRODUZIONE--------------------------------------------*/
 .content-produzione{
+    opacity: 0;
     display: flex;
     flex-direction: row;
     align-items: center;
     margin: 10rem 5rem;
     margin-bottom: 5rem;
-    opacity: 0;
 }
 
 
 .content-produzione img{
     width: 60%;
     margin-left: 40%;
-    height: 550px;
+    height: 600px;
     object-fit: cover;
     position: absolute;
 }
@@ -226,7 +227,7 @@
 }
 
 .categoria{
-    margin: 0;
+    margin-bottom: 2rem;
     font-size: 20px;
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
@@ -234,6 +235,7 @@
 
 .title{
     margin: 0;
+    line-height: 1;
     font-size: 90px;
     font-weight: bold;
 }
@@ -264,11 +266,55 @@
 
 
 
+
+
+
 /*--------------------------ingredienti------------------------------*/
 
 
+.content-ingredienti{
+    opacity: 0;
+    display: flex;
+    flex-direction: row;
+    margin: 15rem 5rem;
+    position: relative;
+}
+
+.content-ingredienti img{
+    object-fit: cover;
+    width: 55%;
+    height: 600px;
+}
+
+.ingredienti-description {
+    padding: 2rem;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 75%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+    width: 55%;
+}
 
 
+.button{
+    font-size: 22px;
+    font-weight: lighter;
+    border: 1px solid white;
+    background-color: transparent;
+    color: white;
+    padding: 15px 40px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    position: absolute;
+}
+
+.button:hover{
+    background-color: #A36D16;
+    transform: scale(1.1);
+    border: none;
+}
 
 
 
