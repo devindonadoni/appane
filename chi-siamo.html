@@ -52,6 +52,11 @@
         </div>
     </div>
     <div class="main-container">
+        <video autoplay muted loop id="myVideo">
+            <source src="img/stock/247855_small.mp4" type="video/mp4">
+        </video>
+
+        <div class="video-overlay"></div>
 
         <div class="vendita-bar">
             <i class="fa-solid fa-store"></i>
@@ -134,7 +139,8 @@
             <div class="produzione-description">
                 <p class="categoria">PRODUZIONE</p>
                 <p class="title">QUALITA' ARTIGIALE</p>
-                <p class="testo">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vel nisl condimentum, pellentesque
+                <p class="testo">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vel nisl condimentum,
+                    pellentesque
                     augue elementum, aliquam neque. Praesent imperdiet tortor ipsum, at lobortis nulla interdum in.</p>
                 <button class="button">SCOPRI</button>
             </div>
@@ -142,6 +148,41 @@
         </div>
 
         
+    </div>
+    <div class="footer">
+        <div class="rigraziamenti">
+            <img src="img/logo.png" alt="">
+            <p>Grazie per aver scelto la nostra bakery! <br> Siamo felici di addolcire ogni tuo  <br>momento speciale. ❤️</p>
+        </div>
+        <div class="links-footer">
+            <h1 class="link-title">Links</h1>
+            <div class="links-p">
+                <p>Home</p>
+                <p>Consegna</p>
+                <p>Chi siamo</p>
+                <p>Contatti</p>
+            </div>
+        </div>
+        <div class="office">
+            <h1 class="link-title">Office</h1>
+            <p>Via alviano 4</p>
+            <p>Trieste, TS 34128</p>
+            <p>signor@appane.it</p>
+        </div>
+        <div class="news-seller">
+            <h1 class="link-title">Newseller</h1>
+            <div class="email">
+                <i class="fa-regular fa-envelope"></i>
+                <input type="text" placeholder="Inserisci la tua email">
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
+            <div class="socials">
+                <i class="fa-brands fa-facebook"></i>
+                <i class="fa-brands fa-square-x-twitter"></i>
+                <i class="fa-brands fa-whatsapp"></i>
+                <i class="fa-brands fa-pinterest"></i>
+            </div>
+        </div>
     </div>
 
 
@@ -162,7 +203,7 @@
                 observer.unobserve(entry.target); // Non osservare più l'elemento dopo l'animazione
             }
         });
-    }, { threshold: 0.5 }); // Trigger l'animazione quando il 50% dell'elemento è visibile
+    }, { threshold: 0.35 }); // Trigger l'animazione quando il 50% dell'elemento è visibile
 
     // Aggiungi l'osservatore agli elementi
     document.querySelectorAll('.content-mission, .content-storia, .content-chisiamo, .content-produzione').forEach((element) => {
