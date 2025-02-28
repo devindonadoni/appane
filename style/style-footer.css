@@ -1,0 +1,131 @@
+/*-------------------------------footer-----------------------*/
+
+.footer{
+    margin-top: 15rem;
+    width: 100%;
+    height: auto;
+    border-top-left-radius: 100px;
+    background: linear-gradient(to right,#433321, #3F2E1A, #372812, #3D290B, #472D03);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.up-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 100px;
+}
+
+.rigraziamenti{
+    padding: 5rem;
+    color: white;
+    font-size: 18px;
+}
+
+.links-footer,
+.office,
+.news-seller
+{
+    padding-top: 3rem;
+    font-size: 18px;
+    color: white;
+}
+
+.link-title{
+    color: white;
+    border-bottom: 2px solid white;
+}
+
+.links-p{
+    transition: color 0.3s; /* Transizione fluida */
+}
+
+.links-p:hover{
+    color: rgba(255, 255, 255, 0.507);
+}
+
+
+.links-footer p{
+    transition: color 0.5s;
+}
+
+.links-footer p:hover{
+    color: #A36D16;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+
+
+.news-seller{
+    margin-right: 5rem;
+}
+
+
+.email{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 30px;
+    gap: 20px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid rgb(158, 158, 158);
+}
+
+.email input{
+    background-color: transparent;
+    border: none;
+    height: 100%;
+    width: auto;
+    font-size: 18px;
+    color: white;
+}
+
+.email input::placeholder{
+    font-size: 18px;
+    color: rgb(158, 158, 158);
+}
+
+input:focus{
+    outline: none;
+}
+
+.socials {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 20px;
+    font-size: 30px;
+    transition: color 0.5s; /* Transizione fluida */
+}
+
+/* Colore grigio per tutte le icone quando si passa con il mouse su .socials */
+.socials:hover i {
+    color: gray;
+}
+
+/* Colore predefinito delle icone */
+.socials i {
+    color: white; 
+    transition: color 0.5s; /* Transizione fluida */
+    padding: 25px;
+}
+
+/* Colore arancione per l'icona quando viene hoverata */
+.socials i:hover {
+    color: #A36D16;
+    transform: scale(1.05);
+    font-weight: bold;
+}
+
+
+.center-label{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    color: rgba(255, 255, 255, 0.603);
+}
