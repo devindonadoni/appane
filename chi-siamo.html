@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="style/style-header.css">
     <link rel="stylesheet" href="style/style-chisiamo.css">
     <link rel="stylesheet" href="style/style-footer.css">
+    <link rel="stylesheet" href="style/style-dropdown.css">
 </head>
 
 <body>
@@ -43,9 +44,37 @@
                 <span class="cart-count">
                     4
                 </span></a>
-            <a href="">
-                <i class="fa-solid fa-user"></i>
-            </a>
+                <li class="profile-icon">
+                    <a class="profile-link">
+                        <i class="fa-solid fa-user"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="name-container">
+                            <h1>' . $nomeUtente . '</h1>
+                            <p >' . $emailUtente . '</p>
+                        </div>
+                        <div class="dropmenu-element" onclick="redirect('profilo')">
+                            <i class="fa-solid fa-user"></i>
+                            <p>Profilo</p>
+                        </div>
+                        <div class="dropmenu-element" onclick="redirect('Ordini')">
+                            <i class="fa-solid fa-truck"></i>
+                            <p>Ordini</p>
+                        </div>
+                        <div class="dropmenu-element" onclick="redirect('Impostazioni')">
+                            <i class="fa-solid fa-gear"></i>    
+                            <p>Impostazioni</p>
+                        </div>
+                        <div class="dropmenu-element" onclick="redirect('Help')">
+                            <i class="fa-solid fa-comments"></i>
+                            <p>Help</p>
+                        </div>
+                        <div class="dropmenu-element-signout" onclick="logout()">
+                            <i class="fa-solid fa-sign-out"></i>
+                            <p>SIGN OUT</p>
+                        </div>
+                    </div>
+                </li>
         </div>
         <!-- Menu a panino -->
         <div class="hamburger-menu">
@@ -221,6 +250,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
 
 </body>
+<script src="js/profile-menu.js"></script>
 <script src="js/universal-script.js"></script>
 
 <script>
