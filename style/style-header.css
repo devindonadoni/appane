@@ -211,3 +211,123 @@ a{
   #nprogress .spinner {
     display: none !important;
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /* Sfondo sfocato */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    display: none;
+    z-index: 10;
+}
+
+/* Modal di Login */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    display: none;
+    z-index: 20;
+    background: linear-gradient(#5F4830, #85633f);
+}
+
+
+.up-content{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+/* Pulsante di chiusura */
+.up-content span {
+    font-size: 24px;
+    cursor: pointer;
+    padding: 2px 12px;
+    border-radius: 100px;
+}
+
+.up-content span:hover {
+    background-color: rgba(185, 185, 185, 0.616);
+}
+
+.up-content img{
+    width: 120px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+
+.content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 11px;
+    color: white;
+}
+
+.content input{
+    margin: 0.3rem;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    color: white;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.629);
+    transition: 0.1s ease;
+    padding: 5px;
+}
+
+.content input:focus{
+    border-bottom: 1px solid #A36D16;
+}
+
+.content input::placeholder{
+    color: rgba(255, 255, 255, 0.629);
+}
+
+.content button{
+    margin-top: 1rem;
+    padding: 5px 25px;
+    background-color: #A36D16;
+    color: white;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    transition: 0.2s ease-in;
+}
+
+.content button:hover{
+    cursor: pointer;
+    background-color: #ac7318;
+}
+
+.content a{
+    text-decoration: none;
+    color: white;
+    margin-top: 30px;
+}
+
+.content a span:hover{
+    color: #ac7318;
+}

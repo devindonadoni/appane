@@ -144,51 +144,95 @@ ul.allergeni {
     opacity: 80%;
 }
 
-.button-content{
+
+
+/*--------------------------bottone--------------------------*/
+
+
+.button-content {
     margin: 2rem 5rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 60px;
 }
 
-
-
-
-
-
-.quantita-content
-{
+.quantita-content {
+    position: relative;
     width: 100px;
     padding: 10px 20px;
     color: rgba(255, 255, 255, 0.603);
     border: 2px solid rgba(255, 255, 255, 0.603);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
 }
 
-.quantita-content:hover
-{
+/* Hover effetto */
+.quantita-content:hover {
     background-color: rgba(255, 255, 255, 0.03);
 }
 
-.quantita-content select
-{
+/* Stile della select */
+.quantita-content select {
     border: none;
     outline: none;
     background-color: transparent;
     font-size: 18px;
     color: rgba(255, 255, 255, 0.603);
+    appearance: none; /* Nasconde la freccia di default */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 100%;
+    padding-right: 30px;
+    cursor: pointer;
 }
 
-.quantita-content select option
-{
+/* Dropdown opzioni */
+.quantita-content select option {
     background-color: #fff;
     color: #333;
-    padding: 10px; 
+    padding: 10px 30px; 
 }
 
-.quantita-content select option:checked 
-{
-    background-color: #A36D16; 
-    color: white; 
+.quantita-content select option:checked {
+    background-color: #A36D16;
+    color: white;
 }
 
-.quantita-content select option:hover
-{
-    background-color: #f0f0f0; 
+.quantita-content select option:hover {
+    background-color: #f0f0f0;
+}
+
+/* Stile icona freccia */
+.arrow-icon {
+    position: absolute;
+    right: 15px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.603);
+    transition: transform 0.2s ease-in-out;
+    pointer-events: none;
+}
+
+/* Rotazione della freccia quando il select è aperto */
+.quantita-content.open .arrow-icon {
+    transform: rotate(-90deg);
+}
+
+
+.button h1{
+    font-size: 16px;
+    color: white;
+    background-color: #A36D16;
+    padding: 10px 120px;
+}
+
+.button {
+    transition: transform 0.15s ease-in;
+}
+
+.button:hover{
+    cursor: pointer;
+    transform: scale(1.03);
 }
