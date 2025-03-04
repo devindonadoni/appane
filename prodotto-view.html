@@ -136,27 +136,31 @@
                     </div>
                 </div>
                 <ul class="allergeni">
-                    <li>Cereali contenenti glutine.</li>
-                    <li>Crostacei.</li>
-                    <li>Uova.</li>
-                    <li>Pesce.</li>
-                    <li>Arachidi.</li>
-                    <li>Latte.</li>
-                    <li>Frutta a guscio.</li>
-                    <li>Sedano.</li>
-                    <li>Molluschi.</li>
+                    <li>● Cereali contenenti glutine.</li>
+                    <li>● Crostacei.</li>
+                    <li>● Uova.</li>
+                    <li>● Pesce.</li>
+                    <li>● Arachidi.</li>
+                    <li>● Latte.</li>
+                    <li>● Frutta a guscio.</li>
+                    <li>● Sedano.</li>
+                    <li>● Molluschi.</li>
                 </ul>
             </div>
 
             <div class="button-content">
                 <div class="quantita-content">
-                    <select name="Qty" id="quantita" value="Qty">
+                    <select name="Qty" id="quantita">
                         <option value="">Qty</option>
-                            <option value="volvo">1</option>
-                            <option value="saab">2</option>
-                            <option value="opel">3</option>
-                            <option value="audi">4</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
                     </select>
+                    <i class="fa-solid fa-chevron-down arrow-icon"></i> 
+                </div>
+                <div class="button">
+                    <h1>Aggiungi al carrello</h1>
                 </div>
             </div>
         </div>
@@ -221,50 +225,27 @@
 <script src="js/universal-script.js"></script>
 <script src="js/profile-menu.js"></script>
 
+
 <script>
-    function prevSlide(event, carouselId) {
-        event.stopPropagation(); // Ferma la propagazione dell'evento
-        const carousel = document.querySelector(`[data-carousel-id="${carouselId}"]`);
-        const slides = carousel.querySelectorAll('.carousel-item');
-        const indicators = carousel.querySelectorAll('.indicator');
-        let currentSlide = Array.from(slides).findIndex(slide => slide.classList.contains('active'));
+document.addEventListener("DOMContentLoaded", function() {
+    const selectBox = document.getElementById("quantita");
+    const container = document.querySelector(".quantita-content");
 
-        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-        showSlide(carouselId, currentSlide);
-    }
+    // Quando la select viene cliccata (o aperta)
+    selectBox.addEventListener("click", function() {
+        container.classList.toggle("open"); // Aggiunge/rimuove la classe per ruotare la freccia
+    });
 
-    function nextSlide(event, carouselId) {
-        event.stopPropagation(); // Ferma la propagazione dell'evento
-        const carousel = document.querySelector(`[data-carousel-id="${carouselId}"]`);
-        const slides = carousel.querySelectorAll('.carousel-item');
-        const indicators = carousel.querySelectorAll('.indicator');
-        let currentSlide = Array.from(slides).findIndex(slide => slide.classList.contains('active'));
+    // Quando l'utente seleziona un'opzione
+    selectBox.addEventListener("change", function() {
+        container.classList.add("open"); // Mantiene la freccia ruotata
+    });
 
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(carouselId, currentSlide);
-    }
-
-    function goToSlide(event, carouselId, index) {
-        event.stopPropagation(); // Ferma la propagazione dell'evento
-        showSlide(carouselId, index);
-    }
-
-    function showSlide(carouselId, index) {
-        const carousel = document.querySelector(`[data-carousel-id="${carouselId}"]`);
-        const slides = carousel.querySelectorAll('.carousel-item');
-        const indicators = carousel.querySelectorAll('.indicator');
-
-        slides.forEach((slide, i) => {
-            slide.classList.remove('active');
-            indicators[i].classList.remove('active');
-            if (i === index) {
-                slide.classList.add('active');
-                indicators[i].classList.add('active');
-            }
-        });
-
-        carousel.querySelector('.carousel-inner').style.transform = `translateX(-${index * 100}%)`;
-    }
+    // Quando la select perde il focus (clic fuori)
+    selectBox.addEventListener("blur", function() {
+        container.classList.remove("open"); // Rimuove la rotazione solo se serve
+    });
+});
 </script>
 
 </html>
