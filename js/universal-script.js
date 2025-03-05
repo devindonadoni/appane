@@ -22,7 +22,7 @@ window.addEventListener('load', function () {
 });
 
 function redirect(link, stringa){
-    window.location.replace(link+".html?" + stringa);
+    window.location.replace(link+".php?" + stringa);
 }
 
 
@@ -90,7 +90,7 @@ const closeModal = document.getElementById('closeModal');
 
 // Funzione per controllare se l'utente è loggato
 const isLoggedIn = () => {
-    return document.querySelector(".name-container h1") !== null;
+    return document.querySelector(".name-container h1") == null;                //controlla la variabile nomeUtente invece di h1
 };
 
 // Mostra il modal solo se l'utente NON è loggato

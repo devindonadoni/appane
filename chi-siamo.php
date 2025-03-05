@@ -1,3 +1,10 @@
+<?php
+include $_SERVER['DOCUMENT_ROOT'] . '/appane/api/config/database.php';
+
+include 'login.php';
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,18 +30,18 @@
 
 <body>
     <div class="header">
-        <a href="index.html"><img src="img/logo.png" alt=""></a>
+        <a href="index.php"><img src="img/logo.png" alt=""></a>
         <div class="link">
-            <a href="menu.html">
+            <a href="menu.php">
                 <p>Menu</p>
             </a>
-            <a href="chi-siamo.html">
+            <a href="chi-siamo.php">
                 <p id="active">Chi siamo</p>
             </a>
-            <a href="consegna.html">
+            <a href="consegna.php">
                 <p>Consegna</p>
             </a>
-            <a href="contatti.html">
+            <a href="contatti.php">
                 <p>Contatti</p>
             </a>
         </div>
@@ -44,37 +51,7 @@
                 <span class="cart-count">
                     4
                 </span></a>
-                <li class="profile-icon">
-                    <a class="profile-link">
-                        <i class="fa-solid fa-user"></i>
-                    </a>
-                    <div class="dropdown-menu">
-                        <div class="name-container">
-                            <h1>' . $nomeUtente . '</h1>
-                            <p >' . $emailUtente . '</p>
-                        </div>
-                        <div class="dropmenu-element" onclick="redirect('profilo')">
-                            <i class="fa-solid fa-user"></i>
-                            <p>Profilo</p>
-                        </div>
-                        <div class="dropmenu-element" onclick="redirect('Ordini')">
-                            <i class="fa-solid fa-truck"></i>
-                            <p>Ordini</p>
-                        </div>
-                        <div class="dropmenu-element" onclick="redirect('Impostazioni')">
-                            <i class="fa-solid fa-gear"></i>    
-                            <p>Impostazioni</p>
-                        </div>
-                        <div class="dropmenu-element" onclick="redirect('Help')">
-                            <i class="fa-solid fa-comments"></i>
-                            <p>Help</p>
-                        </div>
-                        <div class="dropmenu-element-signout" onclick="logout()">
-                            <i class="fa-solid fa-sign-out"></i>
-                            <p>SIGN OUT</p>
-                        </div>
-                    </div>
-                </li>
+            <?php include 'profile-menu.php' ?>
         </div>
         <!-- Menu a panino -->
         <div class="hamburger-menu">
@@ -82,19 +59,19 @@
         </div>
         <!-- Menu mobile -->
         <div id="mobile-menu" class="mobile-menu hidden">
-            <a href="menu.html">Menu</a>
-            <a href="chi-siamo.html">Chi siamo</a>
-            <a href="consegna.html">Consegna</a>
-            <a href="contatti.html">Contatti</a>
+            <a href="menu.php">Menu</a>
+            <a href="chi-siamo.php">Chi siamo</a>
+            <a href="consegna.php">Consegna</a>
+            <a href="contatti.php">Contatti</a>
             <div class="mobile-icons">
-                <a href="profilo.html"><i class="fa-solid fa-user"></i></a>
-                <a href="carrello.html"><i class="fa-solid fa-basket-shopping"></i></a>
+                <a href="profilo.php"><i class="fa-solid fa-user"></i></a>
+                <a href="carrello.php"><i class="fa-solid fa-basket-shopping"></i></a>
             </div>
         </div>
     </div>
 
 
-    
+
     <div class="main-container">
         <video autoplay muted loop id="myVideo">
             <source src="img/stock/247855_small.mp4" type="video/mp4">
@@ -107,7 +84,7 @@
             <p>MENU DELLA SETTIMANA ORA DISPONIBILE</p>
         </div>
 
-        
+
 
 
         <div class="content-chisiamo">
@@ -201,7 +178,8 @@
         <div class="up-content">
             <div class="rigraziamenti">
                 <img src="img/logo.png" alt="">
-                <p>Grazie per aver scelto la nostra bakery! <br> Siamo felici di addolcire ogni tuo <br>momento speciale. ❤️
+                <p>Grazie per aver scelto la nostra bakery! <br> Siamo felici di addolcire ogni tuo <br>momento
+                    speciale. ❤️
                 </p>
             </div>
             <div class="links-footer">
