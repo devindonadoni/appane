@@ -26,6 +26,9 @@ include 'login.php';
     <link rel="stylesheet" href="style/style-footer.css">
     <link rel="stylesheet" href="style/style-dropdown.css">
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
 </head>
 
 <body>
@@ -87,7 +90,7 @@ include 'login.php';
           <a href="#item1" class="active">Tutte</a>
         </li>
         <li class="tab-item">
-          <a href="#item2">Pagate</a>
+          <a href="#item2">Confermate</a>
         </li>
         <li class="tab-item">
           <a href="#item3">Cancellate</a>
@@ -124,7 +127,7 @@ include 'login.php';
               <i class="fa-solid fa-chevron-down"></i>
             </div>
             <div class="single-filter">
-              <p>Posto</p>
+              <p>Peso</p>
             </div>
             <div class="single-filter">
               <p>Totale</p>
@@ -156,7 +159,7 @@ include 'login.php';
               <i class="fa-solid fa-chevron-down"></i>
             </div>
             <div class="single-filter">
-              <p>Posto</p>
+              <p>Peso</p>
             </div>
             <div class="single-filter">
               <p>Totale</p>
@@ -185,7 +188,7 @@ include 'login.php';
               <i class="fa-solid fa-chevron-down"></i>
             </div>
             <div class="single-filter">
-              <p>Posto</p>
+              <p>Peso</p>
             </div>
             <div class="single-filter">
               <p>Totale</p>
@@ -217,7 +220,7 @@ include 'login.php';
               <i class="fa-solid fa-chevron-down"></i>
             </div>
             <div class="single-filter">
-              <p>Posto</p>
+              <p>Peso</p>
             </div>
             <div class="single-filter">
               <p>Totale</p>
@@ -279,8 +282,9 @@ include 'login.php';
 
 </body>
 
-<script src="script/profile-menu.js"></script>
-<script src="script/universal-scripts.js"></script>
+<script src="js/profile-menu.js"></script>
+<script src="js/universal-script.js"></script>
+<script src="js/load-tickets.js"></script>
 
 <script>
   function getTab(el) {

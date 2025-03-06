@@ -156,9 +156,14 @@ a {
   border: 2px solid rgba(255, 255, 255, 0);
 }
 
+.single-filter i{
+  color: white;
+}
+
 .single-filter p{
   margin: 0;
   padding: 0;
+  color: white;
 }
 
 .single-filter:hover {

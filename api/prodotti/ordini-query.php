@@ -1,78 +1,81 @@
 <?php
-// Avvia la sessione per accedere alla variabile di sessione
+header('Content-Type: application/json');
+
+include $_SERVER['DOCUMENT_ROOT'] . '/appane/api/config/database.php';
 session_start();
 
-// Verifica se l'utente è loggato e se l'idUtente è presente nella sessione
-if (!isset($_SESSION['idUtente'])) {
+// Verifica se l'utente è loggato e se l'idCliente è presente nella sessione
+if (!isset($_SESSION['idCliente'])) {
     http_response_code(401); // Non autorizzato
     echo json_encode(["error" => "Utente non autenticato"]);
     exit;
 }
 
-// Recupera l'idUtente dalla sessione
-$idUtente = $_SESSION['idUtente'];
-
-// Includi la classe Database
-require_once '../api/config/database.php'; // Sostituisci con il percorso corretto
+// Recupera l'idCliente dalla sessione
+$idCliente = $_SESSION['idCliente'];
 
 try {
-    // Crea un'istanza della classe Database e ottieni la connessione
-    $database = new Database();
-    $conn = $database->getConnection();
-
-    // Query per recuperare le prenotazioni dell'utente, includendo il nomeSettore
+    // Query per recuperare gli ordini dell'utente
     $query = "
         SELECT 
-            p.idPrenotazione,
-            p.statoPrenotazione,
+            o.idOrdine,
+            o.dataOrdine,
+            o.idScelta,
+            o.idIndirizzo,
+            o.idStato,
+            s.idProdotto,
+            p.nome AS nomeProdotto,
+            p.peso,
             p.prezzo,
-            p.idPosto,
-            p.idEvento,
-            e.nomeEvento,
-            e.dataOraEvento,
-            e.idLuogo,
-            l.citta,
-            l.locazione,
-            po.numeroPosto,
-            s.nomeSettore
-        FROM tprenotazione p
-        LEFT JOIN tevento e ON p.idEvento = e.idEvento
-        LEFT JOIN tluogo l ON e.idLuogo = l.idLuogo
-        LEFT JOIN tposto po ON p.idPosto = po.idPosto
-        LEFT JOIN tsettore s ON po.idSettore = s.idSettore  -- Aggiungi il join con tsettore
-        WHERE p.idUtente = :idUtente
+            st.statoOrdine,
+            i.via,
+            i.numeroCivico
+        FROM tordine o
+        LEFT JOIN tsceltaprodotti s ON o.idScelta = s.idScelta
+        LEFT JOIN tprodotto p ON s.idProdotto = p.idProdotto
+        LEFT JOIN tstatoordine st ON o.idStato = st.idStato
+        LEFT JOIN tindirizzo i ON o.idIndirizzo = i.idIndirizzo
+        WHERE o.idCliente = ?
     ";
 
-    // Prepara e esegui la query
-    $stmt = $conn->prepare($query);
-    $stmt->execute(['idUtente' => $idUtente]);
+    // Prepara e esegui la query con MySQLi
+    $stmt = $db_remoto->prepare($query);
+    if (!$stmt) {
+        throw new Exception("Errore nella preparazione della query: " . $db_remoto->error);
+    }
+    
+    $stmt->bind_param("i", $idCliente);
+    
+    if (!$stmt->execute()) {
+        throw new Exception("Errore nell'esecuzione della query: " . $stmt->error);
+    }
 
+    $result = $stmt->get_result();
+    
     // Recupera i risultati
-    $prenotazioni = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $ordini = $result->fetch_all(MYSQLI_ASSOC);
 
     // Formatta i risultati
-    $result = [];
-    foreach ($prenotazioni as $prenotazione) {
-        $result[] = [
-            'idPrenotazione' => $prenotazione['idPrenotazione'],
-            'statoPrenotazione' => $prenotazione['statoPrenotazione'],
-            'prezzo' => $prenotazione['prezzo'],
-            'numeroPosto' => $prenotazione['numeroPosto'],
-            'nomeEvento' => $prenotazione['nomeEvento'],
-            'dataOraEvento' => $prenotazione['dataOraEvento'],
-            'citta' => $prenotazione['citta'],
-            'locazione' => $prenotazione['locazione'],
-            'nomeSettore' => $prenotazione['nomeSettore'] // Aggiungi il nomeSettore
+    $response = [];
+    foreach ($ordini as $ordine) {
+        $response[] = [
+            'idOrdine' => $ordine['idOrdine'],
+            'dataOrdine' => $ordine['dataOrdine'],
+            'nomeProdotto' => $ordine['nomeProdotto'],
+            'peso' => $ordine['peso'],
+            'prezzo' => $ordine['prezzo'],
+            'statoPrenotazione' => $ordine['statoOrdine'], // Formattato come richiesto
+            'via' => $ordine['via'],
+            'numeroCivico' => $ordine['numeroCivico']
         ];
     }
 
     // Restituisci i risultati in formato JSON
-    header('Content-Type: application/json');
-    echo json_encode($result);
+    echo json_encode($response);
 
-} catch (PDOException $e) {
+} catch (Exception $e) {
     // Gestione degli errori
     http_response_code(500); // Errore del server
-    echo json_encode(["error" => "Errore del database: " . $e->getMessage()]);
+    echo json_encode(["error" => "Errore del server: " . $e->getMessage()]);
 }
 ?>

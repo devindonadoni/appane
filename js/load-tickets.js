@@ -1,7 +1,7 @@
 $(document).ready(function () {
     const apiUrl = 'api/prodotti/ordini-query.php';
 
-    function loadPrenotazioni(statoPrenotazione = null, ordine = 'asc', filtro = 'nomeEvento') {
+    function loadPrenotazioni(statoPrenotazione = null, ordine = 'asc', filtro = 'nomeProdotto') {
         $.ajax({
             url: apiUrl,
             method: 'GET',
@@ -28,17 +28,15 @@ $(document).ready(function () {
                     </div>`
                                     : filteredData.map(prenotazione => `
                         <div class="event-info">
-                            <h1>${prenotazione.nomeEvento}</h1>
-                            <p>${prenotazione.citta} | ${prenotazione.locazione}</p>
-                            <p>${prenotazione.dataOraEvento}</p>
-                            <p>${prenotazione.nomeSettore} - ${prenotazione.numeroPosto ? prenotazione.numeroPosto : 'Posto unico'}</p>
+                            <h1>${prenotazione.nomeProdotto}</h1>
+                            <p>${prenotazione.via} | ${prenotazione.numeroCivico}</p>
+                            <p>${prenotazione.dataOrdine}</p>
+                            <p>${prenotazione.peso}</p>
                             <div class="total">
                                 <p style="color: white; background-color: ${getColor(prenotazione.statoPrenotazione)};">
                                     €${prenotazione.prezzo}, ${prenotazione.statoPrenotazione}
                                 </p>
-                                ${prenotazione.statoPrenotazione === 'confermata'
-                                            ? `<a target="_blank" href="generate-pdf.php?idPrenotazione=${prenotazione.idPrenotazione}"><i class="fa-solid fa-download"></i></a>`
-                                            : ''}
+                                
                             </div>
                         </div>
                 `).join('');
@@ -50,10 +48,10 @@ $(document).ready(function () {
                     case null:
                         $('#item1 .container-event').html(html);
                         break;
-                    case 'confermata':
+                    case 'confermato':
                         $('#item2 .container-event').html(html);
                         break;
-                    case 'cancellata':
+                    case 'cancellato':
                         $('#item3 .container-event').html(html);
                         break;
                     case 'in elaborazione':
@@ -69,20 +67,19 @@ $(document).ready(function () {
 
     // Carica prenotazioni iniziali per tutti i tab
     loadPrenotazioni(null); // Tutte
-    loadPrenotazioni('confermata'); // Pagate
-    loadPrenotazioni('cancellata'); // Cancellate
+    loadPrenotazioni('confermato'); // Pagate
+    loadPrenotazioni('cancellato'); // Cancellate
     loadPrenotazioni('in elaborazione'); // Scadute
 
     function getColor(statoPrenotazione) {
         switch (statoPrenotazione) {
-            case 'confermata': return 'green';
-            case 'cancellata': return 'red';
+            case 'confermato': return 'green';
+            case 'cancellato': return 'red';
             case 'in elaborazione': return 'orange';
             default: return 'gray';
         }
     }
 
-    // 🔥 2️⃣ Aggiunta della funzionalità di filtro dinamico per tutti i tab
     let filtriStato = {
         'evento': { campo: 'nomeEvento', ordine: 'asc' },
         'luogo': { campo: 'citta', ordine: 'asc' },
@@ -109,10 +106,10 @@ $(document).ready(function () {
                     loadPrenotazioni(null, filtro.ordine, filtro.campo);
                     break;
                 case "item2":
-                    loadPrenotazioni("confermata", filtro.ordine, filtro.campo);
+                    loadPrenotazioni("confermato", filtro.ordine, filtro.campo);
                     break;
                 case "item3":
-                    loadPrenotazioni("cancellata", filtro.ordine, filtro.campo);
+                    loadPrenotazioni("cancellato", filtro.ordine, filtro.campo);
                     break;
                 case "item4":
                     loadPrenotazioni("in elaborazione", filtro.ordine, filtro.campo);
