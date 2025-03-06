@@ -17,6 +17,7 @@ function getMenu() {
             response.forEach(prodotto => {
                 let carouselItems = '';
                 let indicators = '';
+                let soldoutOverlay = prodotto.quantita === 0 ? '<div class="soldout-overlay">SOLD OUT</div>' : '';
 
                 if (Array.isArray(prodotto.foto) && prodotto.foto.length > 0) {
                     prodotto.foto.forEach((foto, index) => {
@@ -34,7 +35,8 @@ function getMenu() {
                 }
 
                 output += `
-                    <div class="single-product" onclick="reindirizza('prodotto-view', 'idProdotto=${prodotto.idProdotto}' , 'idMenu=${prodotto.idMenu}')">
+                <div class="single-product" onclick="reindirizza('prodotto-view', 'idProdotto=${prodotto.idProdotto}' , 'idMenu=${prodotto.idMenu}')">
+                        ${soldoutOverlay}  <!-- Overlay soldout condizionato dalla quantità -->
                         <div class="carousel" data-carousel-id="${prodotto.idProdotto}">
                             <div class="carousel-inner">${carouselItems}</div>
                             <button class="carousel-control-prev" onclick="prevSlide(event, ${prodotto.idProdotto})">&#10094;</button>
@@ -45,7 +47,7 @@ function getMenu() {
                             <p>${prodotto.nome}</p>
                             <p class="weight">${prodotto.peso}g</p>
                             <div class="buttons">
-                                <p>${parseFloat(prodotto.prezzo).toFixed(2)} €</p>
+                                <p>${parseFloat(prodotto.prezzo)}€</p>
                                 <div class="allergen-container">
                                     <i class="fa-solid fa-info" onclick="toggleAllergenInfo()"></i>
                                     <div class="allergen-info" id="allergen-info">

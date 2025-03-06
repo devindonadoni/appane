@@ -281,8 +281,8 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    color: white;
 }
-
 
 .no-items-container p {
     padding: 5rem 0;
@@ -302,8 +302,8 @@
 
 
 .no-items-container h1:hover {
-    transform: scale(1.1);
     box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+    background-color: #c7861d;
 }
 
 
@@ -311,3 +311,4 @@
 .primary-nav img {
     margin-top: 50px;
 }
+

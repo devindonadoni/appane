@@ -48,11 +48,16 @@ include 'login.php';
             </a>
         </div>
         <div class="nav-link">
-            <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
             <a href="" class="cart-wrapper"><i class="fa-solid fa-basket-shopping"></i>
-                <span class="cart-count">
-                    4
-                </span></a>
+            <?php
+                if ($idCliente) {
+                    if ($result) {
+                        echo '<span class="cart-count">';
+                        echo $countCart;
+                        echo '</span> <!-- Numero hardcoded -->';
+                    }
+                }
+                ?>
             <?php include 'profile-menu.php' ?>
         </div>
         <!-- Menu a panino -->
@@ -113,7 +118,7 @@ include 'login.php';
                     <h1>Totale:</h1>
                     <p id="totale">€0.00</p>
                 </div>
-                <div class="checkout-button-container" onclick="payment()">
+                <div class="checkout-button-container" onclick="confermaIndirizzo()">
                     <input type="submit" name="checkout-button" id="checkout-button" value="CHECKOUT">
                 </div>
             </div>
@@ -182,6 +187,7 @@ include 'login.php';
 <script src="js/profile-menu.js"></script>
 <script src="js/universal-script.js"></script>
 <script src="js/load-cart.js"></script>
+<script src="js/remove-cart.js"></script>
 
 <script>
     const observer = new IntersectionObserver((entries, observer) => {
@@ -210,58 +216,87 @@ include 'login.php';
 
 
 <script>
-    async function payment() {
-        const grandTotalElement = document.getElementById("totale");
-        const grandTotal = parseFloat(grandTotalElement.textContent.replace("€", "").replace(",", "."));
+   function confermaIndirizzo() {
+    // Recupera l'ID cliente dalla sessione
+    var idCliente = <?php echo isset($_SESSION['idCliente']) ? json_encode($_SESSION['idCliente']) : 'null'; ?>;
+    console.log(idCliente);
+    if (!idCliente) {
+        alert("Errore: ID cliente non disponibile");
+        return;
+    }
 
-        console.log("Payment function triggered.");
-
-        if (isNaN(grandTotal) || grandTotal <= 0) {
-            Swal.fire(
-                'Errore',
-                'Il totale non è valido. Assicurati che ci siano elementi nel carrello.',
-                'error'
-            );
+    // Prima chiamata AJAX per ottenere l'indirizzo di default
+    fetch('api/prodotti/getIndirizzo.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ idCliente })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (!data.success) {
+            alert("Errore nel recupero dell'indirizzo");
             return;
         }
 
-        try {
-            const response = await fetch('api/prenotazioni/checkout.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    totale: grandTotal
-                }),
-            });
+        let indirizzoDefault = data.via;
+        let numeroCivicoDefault = data.numeroCivico;
+        let internoDefault = data.interno;
+        let idIndirizzo = data.idIndirizzo;
 
-            const result = await response.json();
+        // Mostra tre prompt separati per via, numeroCivico e interno
+        let via = prompt("Inserisci la via:", indirizzoDefault);
+        if (!via) return;
 
-            if (result.success) {
-                Swal.fire(
-                    'Successo',
-                    'Pagamento completato con successo!',
-                    'success'
-                ).then(() => {
-                    window.location.href = 'cart.php';
-                });
-            } else {
-                Swal.fire(
-                    'Errore',
-                    result.message || 'Si è verificato un errore durante il pagamento.',
-                    'error'
-                );
+        let numeroCivico = prompt("Inserisci il numero civico:", numeroCivicoDefault);
+        if (!numeroCivico) return;
+
+        let interno = prompt("Inserisci l'interno:", internoDefault || "");
+        if (interno === null) return; // L'utente ha annullato l'input
+
+
+        // Seconda chiamata AJAX per verificare o aggiungere l'indirizzo
+        fetch('api/prodotti/VerificaIndirizzo.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({via, numeroCivico, interno })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (!data.success) {
+                alert("Errore nella verifica dell'indirizzo");
+                return;
             }
-        } catch (error) {
-            console.error("Errore durante la richiesta:", error);
-            Swal.fire(
-                'Errore',
-                'Errore di connessione con il server. Riprova più tardi.',
-                'error'
-            );
-        }
-    }
+
+            let idIndirizzoCorretto = data.idIndirizzo;
+
+            // Terza chiamata AJAX per confermare il checkout
+            fetch('api/prodotti/checkout.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ idCliente, idIndirizzo: idIndirizzoCorretto })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    Swal.fire({
+                                title: "Ordine Confermato!",
+                                text: "Il tuo ordine e' stato confermato.",
+                                icon: "success",
+                                confirmButtonText: "OK"
+                            }).then(() => {
+                                    window.location.href = 'carrello.php';
+                            });
+                } else {
+                    alert("Errore nel completamento dell'ordine");
+                }
+            })
+            .catch(error => console.error("Errore durante il checkout", error));
+        })
+        .catch(error => console.error("Errore durante la verifica dell'indirizzo", error));
+    })
+    .catch(error => console.error("Errore nel recupero dell'indirizzo", error));
+}
+
 </script>
 
 

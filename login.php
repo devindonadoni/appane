@@ -33,6 +33,22 @@ if ($utenteSessione == '') {
     }
 
 }
+
+
+
+$idCliente = "";
+if(isset($_SESSION['email'])){
+    $idCliente = $_SESSION['idCliente'];
+
+    $sql = "SELECT COUNT(*) AS count FROM tordine WHERE idStato = '1' AND idCliente = '$idCliente'";
+    $result = mysqli_query($db_remoto, $sql);
+
+    if ($result) {
+        $row = mysqli_fetch_assoc($result);
+        $countCart = $row['count'];
+    }
+}
+
 ?>
 
 
@@ -56,7 +72,7 @@ if ($utenteSessione == '') {
                     <p style="color: red; display: flex; justify-content: center;"><?= htmlspecialchars($error) ?></p>
                 <?php endif; ?>
                 <button>ACCEDI</button>
-                <a href="">
+                <a href="singup.php">
                     <p>Non hai un account? <span>Registrati</span></p>
                 </a>
             </div>

@@ -27,7 +27,7 @@ if (empty($prodotti)) {
 $idProdotti = implode(",", $prodotti);
 
 // 3) Prendi i dati dei prodotti e le tipologie
-$query_dati_prodotti = "SELECT p.idProdotto, p.nome, p.peso, p.prezzo, t.nome AS tipologia 
+$query_dati_prodotti = "SELECT p.idProdotto, p.nome, p.peso, p.prezzo, p.quantita, t.nome AS tipologia 
                         FROM tprodotto p 
                         JOIN ttipologia t ON p.idTipologia = t.idTipologia
                         WHERE p.idProdotto IN ($idProdotti)";

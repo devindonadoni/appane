@@ -52,9 +52,15 @@ include 'login.php';
         </div>
         <div class="nav-link">
             <a href="carrello.php" class="cart-wrapper"><i class="fa-solid fa-basket-shopping"></i>
-                <span class="cart-count">
-                    4
-                </span></a>
+            <?php
+                if ($idCliente) {
+                    if ($result) {
+                        echo '<span class="cart-count">';
+                        echo $countCart;
+                        echo '</span> <!-- Numero hardcoded -->';
+                    }
+                }
+                ?>
 
             <?php include 'profile-menu.php' ?>
 

@@ -50,11 +50,7 @@ function getProdotto(idProdotto) {
 
                     <div class="descrizione">
                         <div class="left-side">
-                            <p>La nostra missione in Appane è portare ogni giorno sulle vostre tavole la bontà autentica della
-                                panificazione artigianale. Crediamo nella qualità senza compromessi e nella cura dei dettagli,
-                                selezionando con amore ingredienti genuini e freschi per creare prodotti che regalino emozioni
-                                ad ogni morso. Vogliamo essere il punto di riferimento per chi cerca sapori veri, capaci di
-                                risvegliare ricordi e creare nuovi momenti di felicità.</p>
+                            <p>${response.descrizione}.</p>
                             <div class="info">
                                 <p>Quantità al pezzo: ${response.peso}g</p>
                                 <p>Prezzo al pezzo: €${response.prezzo}</p>

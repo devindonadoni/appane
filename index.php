@@ -2,7 +2,6 @@
 include $_SERVER['DOCUMENT_ROOT'] . '/appane/api/config/database.php';
 
 include 'login.php';
-
 ?>
 
 
@@ -53,11 +52,18 @@ include 'login.php';
             </a>
         </div>
         <div class="nav-link">
-            <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
-            <a href="" class="cart-wrapper"><i class="fa-solid fa-basket-shopping"></i>
-                <span class="cart-count">
-                    4
-                </span></a>
+            <a href="carrello.php" class="cart-wrapper">
+                <i class="fa-solid fa-basket-shopping"></i>
+                <?php
+                if ($idCliente) {
+                    if ($result) {
+                        echo '<span class="cart-count">';
+                        echo $countCart;
+                        echo '</span> <!-- Numero hardcoded -->';
+                    }
+                }
+                ?>
+            </a>
             <?php include 'profile-menu.php' ?>
         </div>
         <!-- Menu a panino -->

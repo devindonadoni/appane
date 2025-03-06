@@ -16,7 +16,7 @@ if (!isset($data['idProdotto']) || !is_numeric($data['idProdotto'])) {
 $idProdotto = (int)$data['idProdotto'];
 
 // 2) Prendi i dati del prodotto e le tipologie
-$query_dati_prodotto = "SELECT p.idProdotto, p.nome, p.peso, p.prezzo, t.nome AS tipologia 
+$query_dati_prodotto = "SELECT p.idProdotto, p.nome, p.peso, p.prezzo, p.descrizione, t.nome AS tipologia 
                         FROM tprodotto p 
                         JOIN ttipologia t ON p.idTipologia = t.idTipologia
                         WHERE p.idProdotto = $idProdotto";
