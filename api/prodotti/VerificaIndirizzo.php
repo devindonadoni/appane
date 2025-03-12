@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-include $_SERVER['DOCUMENT_ROOT'] . '/appane/api/config/database.php';
+include '../config/database.php';
 
 // Recupera i dati dalla richiesta JSON
 $data = json_decode(file_get_contents("php://input"), true);

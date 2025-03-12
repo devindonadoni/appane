@@ -30,7 +30,7 @@ $(document).ready(function () {
                         <div class="event-info">
                             <h1>${prenotazione.nomeProdotto}</h1>
                             <p>${prenotazione.via} | ${prenotazione.numeroCivico}</p>
-                            <p>${prenotazione.dataOrdine}</p>
+                            <p>${formattaData(prenotazione.dataOrdine)}</p>
                             <p>${prenotazione.peso}</p>
                             <div class="total">
                                 <p style="color: white; background-color: ${getColor(prenotazione.statoPrenotazione)};">
@@ -119,3 +119,16 @@ $(document).ready(function () {
     });
 
 });
+
+
+
+function formattaData(dataISO) {
+    let data = new Date(dataISO);
+    let opzioniData = { day: '2-digit', month: 'long', year: 'numeric' };
+    let opzioniOra = { hour: '2-digit', minute: '2-digit' };
+
+    let dataFormattata = data.toLocaleDateString('it-IT', opzioniData);
+    let oraFormattata = data.toLocaleTimeString('it-IT', opzioniOra);
+
+    return `${dataFormattata} ${oraFormattata}`;
+}

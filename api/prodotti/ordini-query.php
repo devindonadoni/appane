@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json');
 
-include $_SERVER['DOCUMENT_ROOT'] . '/appane/api/config/database.php';
+include '../config/database.php';
 session_start();
 
 // Verifica se l'utente è loggato e se l'idCliente è presente nella sessione
@@ -31,7 +31,8 @@ try {
             i.via,
             i.numeroCivico
         FROM tordine o
-        LEFT JOIN tsceltaprodotti s ON o.idScelta = s.idScelta
+        LEFT JOIN tsceltaProdotti
+ s ON o.idScelta = s.idScelta
         LEFT JOIN tprodotto p ON s.idProdotto = p.idProdotto
         LEFT JOIN tstatoordine st ON o.idStato = st.idStato
         LEFT JOIN tindirizzo i ON o.idIndirizzo = i.idIndirizzo

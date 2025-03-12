@@ -4,6 +4,7 @@ function caricaCarrello() {
         method: 'GET',
         dataType: 'json',
         success: function (data) {
+            console.log("Risposta API:", data);  // <-- Aggiunto per debugging
             $("#carrello-container").empty();
 
             if (data.length === 0) {

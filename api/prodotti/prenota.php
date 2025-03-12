@@ -26,7 +26,7 @@ $idProdotto = $data['idProdotto'];
 $quantita = intval($data['quantita']); // Assicura che sia un numero intero positivo
 
 // db_remotoessione al database
-include $_SERVER['DOCUMENT_ROOT'] . '/appane/api/config/database.php';
+include '../config/database.php';
 
 if (!$db_remoto) {
     echo json_encode(["success" => false, "message" => "Errore di db_remotoessione al database"]);
@@ -37,8 +37,10 @@ try {
     // Avvia una transazione per garantire l'integrità dei dati
     $db_remoto->begin_transaction();
 
-    // 1) Trova l'idScelta nella tabella tsceltaprodotti
-    $query = "SELECT idScelta FROM tsceltaprodotti WHERE idMenu = ? AND idProdotto = ?";
+    // 1) Trova l'idScelta nella tabella tsceltaProdotti
+
+    $query = "SELECT idScelta FROM tsceltaProdotti
+ WHERE idMenu = ? AND idProdotto = ?";
     $stmt = $db_remoto->prepare($query);
     $stmt->bind_param("ii", $idMenu, $idProdotto);
     $stmt->execute();

@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json');
 
-include $_SERVER['DOCUMENT_ROOT'] . '/appane/api/config/database.php';
+include '../config/database.php';
 
 // 1) Trova l'ultimo menu inserito
 $query_menu = "SELECT idMenu FROM tmenu ORDER BY ultimaDataPubblicazione DESC LIMIT 1";
@@ -14,7 +14,7 @@ $menu = mysqli_fetch_assoc($result_menu);
 $idMenu = $menu['idMenu'];
 
 // 2) Trova gli idProdotto associati all'idMenu
-$query_prodotti = "SELECT idProdotto FROM tsceltaprodotti WHERE idMenu = $idMenu";
+$query_prodotti = "SELECT idProdotto FROM tsceltaProdotti WHERE idMenu = $idMenu";
 $result_prodotti = mysqli_query($db_remoto, $query_prodotti);
 $prodotti = [];
 while ($row = mysqli_fetch_assoc($result_prodotti)) {
@@ -40,14 +40,16 @@ while ($row = mysqli_fetch_assoc($result_dati_prodotti)) {
     $prodotti_dati[$row['idProdotto']]['allergeni'] = [];
 }
 
-// 4) Trova gli ingredienti per ogni prodotto
-$query_ingredienti = "SELECT r.idProdotto, i.nome AS ingrediente 
+// 4) Trova gli ingredienti per ogni prodotto e crea una mappa idIngrediente -> idProdotto
+$query_ingredienti = "SELECT r.idProdotto, r.idIngrediente, i.nome AS ingrediente 
                       FROM tricetta r 
                       JOIN tingrediente i ON r.idIngrediente = i.idIngrediente
                       WHERE r.idProdotto IN ($idProdotti)";
 $result_ingredienti = mysqli_query($db_remoto, $query_ingredienti);
+$ingredienti_mappa = [];
 while ($row = mysqli_fetch_assoc($result_ingredienti)) {
     $prodotti_dati[$row['idProdotto']]['ingredienti'][] = $row['ingrediente'];
+    $ingredienti_mappa[$row['idIngrediente']] = $row['idProdotto'];
 }
 
 // 5) Trova le foto per ogni prodotto
@@ -59,15 +61,14 @@ while ($row = mysqli_fetch_assoc($result_foto)) {
 
 // 6) Trova gli allergeni per ogni ingrediente
 $query_allergeni = "SELECT pa.idIngrediente, a.nome AS allergene 
-                    FROM tpresenzaallergene pa 
+                    FROM tpresenzaAllergene AS pa
                     JOIN tallergene a ON pa.idAllergene = a.idAllergene
                     WHERE pa.idIngrediente IN (SELECT idIngrediente FROM tricetta WHERE idProdotto IN ($idProdotti))";
 $result_allergeni = mysqli_query($db_remoto, $query_allergeni);
 while ($row = mysqli_fetch_assoc($result_allergeni)) {
-    foreach ($prodotti_dati as &$prodotto) {
-        if (in_array($row['idIngrediente'], $prodotti_dati[$prodotto['idProdotto']]['ingredienti'])) {
-            $prodotto['allergeni'][] = $row['allergene'];
-        }
+    if (isset($ingredienti_mappa[$row['idIngrediente']])) {
+        $idProdotto = $ingredienti_mappa[$row['idIngrediente']];
+        $prodotti_dati[$idProdotto]['allergeni'][] = $row['allergene'];
     }
 }
 

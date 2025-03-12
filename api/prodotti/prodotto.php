@@ -1,5 +1,5 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/appane/api/config/database.php';
+include '../config/database.php';
 
 header('Content-Type: application/json');
 
@@ -7,13 +7,11 @@ header('Content-Type: application/json');
 
 // 1) Verifica che l'idProdotto sia stato passato tramite POST
 $data = json_decode(file_get_contents("php://input"), true);
-
 if (!isset($data['idProdotto']) || !is_numeric($data['idProdotto'])) {
     echo json_encode(["error" => "ID Prodotto non valido"]);
     exit;
 }
-
-$idProdotto = (int)$data['idProdotto'];
+$idProdotto = $data['idProdotto'];
 
 // 2) Prendi i dati del prodotto e le tipologie
 $query_dati_prodotto = "SELECT p.idProdotto, p.nome, p.peso, p.prezzo, p.descrizione, t.nome AS tipologia 
@@ -49,9 +47,10 @@ while ($row = mysqli_fetch_assoc($result_foto)) {
 
 // 5) Trova gli allergeni per gli ingredienti del prodotto
 $query_allergeni = "SELECT a.nome AS allergene 
-                    FROM tpresenzaallergene pa 
+                    FROM tpresenzaAllergene pa
                     JOIN tallergene a ON pa.idAllergene = a.idAllergene
                     WHERE pa.idIngrediente IN (SELECT idIngrediente FROM tricetta WHERE idProdotto = $idProdotto)";
+
 $result_allergeni = mysqli_query($db_remoto, $query_allergeni);
 while ($row = mysqli_fetch_assoc($result_allergeni)) {
     $prodotto['allergeni'][] = $row['allergene'];

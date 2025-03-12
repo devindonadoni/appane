@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once $_SERVER['DOCUMENT_ROOT'] . '/appane/api/config/database.php';
+include '../config/database.php';
 
 header("Content-Type: application/json");
 
@@ -35,7 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $idScelta = $scelta['idScelta'];
 
             // Trova l'idProdotto associato alla scelta
-            $sqlProdotto = "SELECT idProdotto FROM tsceltaprodotti WHERE idScelta = ?";
+            $sqlProdotto = "SELECT idProdotto FROM tsceltaProdotti
+ WHERE idScelta = ?";
             $stmtProdotto = mysqli_prepare($db_remoto, $sqlProdotto);
             mysqli_stmt_bind_param($stmtProdotto, "i", $idScelta);
             mysqli_stmt_execute($stmtProdotto);

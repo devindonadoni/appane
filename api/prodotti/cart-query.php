@@ -1,21 +1,21 @@
 <?php
 header('Content-Type: application/json');
-include $_SERVER['DOCUMENT_ROOT'] . '/appane/api/config/database.php';
+include '../config/database.php';
 
 session_start();
 
-// Verifica se l'ID del cliente è stato inviato
 if (!isset($_SESSION['idCliente'])) {
     echo json_encode(["error" => "ID cliente mancante"]);
     exit;
 }
 
-$idCliente = intval($_SESSION['idCliente']);
+$idCliente = $_SESSION['idCliente'];
 
 $query = "
     SELECT o.idOrdine, o.dataOrdine, p.nome AS nomeProdotto, p.peso, p.prezzo 
     FROM tordine o
-    JOIN tsceltaprodotti s ON o.idScelta = s.idScelta
+    JOIN tsceltaProdotti
+ s ON o.idScelta = s.idScelta
     JOIN tprodotto p ON s.idProdotto = p.idProdotto
     WHERE o.idCliente = ? AND o.idStato = 1
 ";

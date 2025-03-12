@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-include $_SERVER['DOCUMENT_ROOT'] . '/appane/api/config/database.php';
+include '../config/database.php';
 session_start(); // Avvia la sessione per ottenere l'idCliente
 
 

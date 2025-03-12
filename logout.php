@@ -1,5 +1,5 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/appane/api/config/database.php';
+include 'api/config/database.php';
 session_start();
 
 session_destroy();
